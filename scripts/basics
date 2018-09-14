@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -x  # All executed commands are printed to the terminal
+
+gpg --keyserver keyserver.ubuntu.com --recv-keys 5C808C2B65558117
+gpg -a -o /tmp/avidemux.gpg --export 5C808C2B65558117
+apt-key add /tmp/avidemux.gpg
+
+aptitude update ; aptitude install -y avidemux-qt dbus-x11 libgcc1 libstdc++6
+
+apt-get -y autoremove ; aptitude -y autoclean ; apt-get -y autoclean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.aptitude
